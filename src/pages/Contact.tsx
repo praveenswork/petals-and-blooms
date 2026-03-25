@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send, Loader2 } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
-import { toast } from 'sonner';
+import React, { useState } from "react";
+import { motion } from "motion/react";
+import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import { Helmet } from "react-helmet-async";
+import { toast } from "sonner";
 
 export const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,22 +24,22 @@ export const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || 'Message sent successfully!');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        toast.success(data.message || "Message sent successfully!");
+        setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
-        toast.error(data.error || 'Failed to send message.');
+        toast.error(data.error || "Failed to send message.");
       }
     } catch (error) {
-      toast.error('Something went wrong. Please try again later.');
+      toast.error("Something went wrong. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -47,14 +49,19 @@ export const Contact = () => {
     <div className="py-16">
       <Helmet>
         <title>Contact Us | Petals & Blooms</title>
-        <meta name="description" content="Get in touch with Petals & Blooms for custom bouquet orders, wedding inquiries, or any floral questions." />
+        <meta
+          name="description"
+          content="Get in touch with Petals & Blooms for custom bouquet orders, wedding inquiries, or any floral questions."
+        />
       </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           <div>
             <h1 className="text-5xl font-serif mb-8">Get in Touch</h1>
             <p className="text-gray-600 text-lg mb-12 leading-relaxed">
-              Whether you have a question about our bouquets, want to discuss a custom arrangement, or just want to say hello, we'd love to hear from you.
+              Whether you have a question about our bouquets, want to discuss a
+              custom arrangement, or just want to say hello, we'd love to hear
+              from you.
             </p>
 
             <div className="space-y-8">
@@ -63,8 +70,10 @@ export const Contact = () => {
                   <Phone size={20} />
                 </div>
                 <div>
-                  <h4 className="font-bold uppercase tracking-widest text-xs mb-1">Call Us</h4>
-                  <p className="text-gray-600">+1 (234) 567-890</p>
+                  <h4 className="font-bold uppercase tracking-widest text-xs mb-1">
+                    Call Us
+                  </h4>
+                  <p className="text-gray-600">+91 95006 17928</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
@@ -72,7 +81,9 @@ export const Contact = () => {
                   <Mail size={20} />
                 </div>
                 <div>
-                  <h4 className="font-bold uppercase tracking-widest text-xs mb-1">Email Us</h4>
+                  <h4 className="font-bold uppercase tracking-widest text-xs mb-1">
+                    Email Us
+                  </h4>
                   <p className="text-gray-600">hello@petalsandblooms.com</p>
                 </div>
               </div>
@@ -81,8 +92,10 @@ export const Contact = () => {
                   <MapPin size={20} />
                 </div>
                 <div>
-                  <h4 className="font-bold uppercase tracking-widest text-xs mb-1">Visit Us</h4>
-                  <p className="text-gray-600">123 Floral Lane, Garden City, NY 11530</p>
+                  <h4 className="font-bold uppercase tracking-widest text-xs mb-1">
+                    Visit Us
+                  </h4>
+                  <p className="text-gray-600">Coimbatore, Tamil Nadu</p>
                 </div>
               </div>
             </div>
@@ -96,7 +109,9 @@ export const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-xs uppercase tracking-widest font-bold mb-2">Name</label>
+                  <label className="block text-xs uppercase tracking-widest font-bold mb-2">
+                    Name
+                  </label>
                   <input
                     required
                     name="name"
@@ -108,7 +123,9 @@ export const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-widest font-bold mb-2">Email</label>
+                  <label className="block text-xs uppercase tracking-widest font-bold mb-2">
+                    Email
+                  </label>
                   <input
                     required
                     name="email"
@@ -121,7 +138,9 @@ export const Contact = () => {
                 </div>
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-widest font-bold mb-2">Subject</label>
+                <label className="block text-xs uppercase tracking-widest font-bold mb-2">
+                  Subject
+                </label>
                 <input
                   name="subject"
                   value={formData.subject}
@@ -132,7 +151,9 @@ export const Contact = () => {
                 />
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-widest font-bold mb-2">Message</label>
+                <label className="block text-xs uppercase tracking-widest font-bold mb-2">
+                  Message
+                </label>
                 <textarea
                   required
                   name="message"
@@ -153,7 +174,10 @@ export const Contact = () => {
                 ) : (
                   <>
                     Send Message
-                    <Send className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={18} />
+                    <Send
+                      className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                      size={18}
+                    />
                   </>
                 )}
               </button>
