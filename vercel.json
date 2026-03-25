@@ -13,6 +13,10 @@
   ],
   "routes": [
     {
+      "src": "/api/contact",
+      "dest": "/api/contact"
+    },
+    {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },
